@@ -1,0 +1,23 @@
+[
+	{
+	    "title": "Ubikah",
+	    "hashtag": "#javascript  #node.js  #animation  #game",
+	    "description":"Ubikah is a multiplayer online game. You play an astronaut, or his drone, who need to escape to an hostile planet.",
+	    "role":"All of it.",
+	    "color": "#3A93C4"
+	},
+	{
+	    "title": "Libia Vélo",
+	    "hashtag": "#javascript   #animation",
+	    "description":"Libia vélo is a redesign of the free bikes’s bornes of the city of Namur. We redesign and developper a brand new interface.",
+	    "role":"development of the borne (ipad support)",
+	    "color": "#52cea8"
+	},
+	{
+	    "title": "iMoule",
+	    "hashtag": "#javascript   #animation",
+	    "description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia fugit eaque, quod ut quis hic architecto earum deleniti.",
+	    "role":"Design and development",
+	    "color": "#FBF19C"
+	}
+]
