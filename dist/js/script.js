@@ -10,6 +10,7 @@ $('document').ready(function(){
 	var canSwitchWork = true;
 	var currentColorWork = '#3A93C4';
 	var canAnim = true;
+	var windowWidth = $('body').width();
 
 
 	// ANIMATION INTRODUCTION AFTER PAGE LOAD
@@ -40,11 +41,11 @@ $('document').ready(function(){
             	{transform: 'translate(220px, 80px)', opacity: 0.1, ease: Circ.easeOut,delay:1.9}
             ),
             TweenMax.to('.introduction--initiale', 0.6,
-            	{opacity: 0.04, ease: Ease.easeOut,delay:2.2}
+            	{opacity: 0.04, ease: Ease.easeOut,delay:2}
             ),
-            TweenMax.staggerFromTo('.introduction--title > span', 0.8, 
+            TweenMax.staggerFromTo('.introduction--title > span', 0.5, 
             	{opacity:0, transform: 'translate(0, 40px)'},
-            	{opacity:1, transform: 'translate(0, 0)', ease: Circ.easeOut, delay: 2.6}, 0.4
+            	{opacity:1, transform: 'translate(0, 0)', ease: Circ.easeOut, delay: 2.6}, 0.25
             )
     	]
     );
@@ -96,6 +97,73 @@ $('document').ready(function(){
 		});
 	}
 
+	$('.works--left').css('transform','translateX(-100%)');
+	$('.works--right').css('transform','translateX(100%)');
+
+	function AnimInWorks(){
+		if(canAnim) {
+			canAnim = false;
+	    	$('.works--element > span').css('transform', 'translateY(50px)');
+	    	$('.works--right > img').css('opacity', 0);
+	    	
+
+		    setTimeout(function(){
+				animWorksIn = new TimelineMax ()
+			        .add([
+			        	TweenMax.to('.works--half', 0.6,
+			        		{transform: 'translateX(0)', ease: Power4.easeIn}
+			        	),
+			        	TweenMax.to('.works--right', 0.6,
+			        		{transform: 'translateX(0)', ease: Power4.easeIn,delay: 0.1}
+			        	),
+			            TweenMax.staggerFromTo('.works--element > span', 0.6, 
+			            	{transform: 'translate(0, 50px)'},
+			            	{transform: 'translate(0)', ease: Circ.easeOut, delay: 1},0.3
+			            ),
+			            TweenMax.staggerFromTo('.works--right > img', 1.6, 
+			            	{opacity: 0, transform: 'translate(0, -50px)'},
+			            	{opacity: 1, transform: 'translate(0)', ease: Power4.easeOut,delay: 1.4},0.4
+			            ),
+			    	]
+			    );
+
+			    setTimeout(function(){
+			    	canAnim = true;
+			    },800);
+
+	    	},1000);
+		}
+	}
+
+	function AnimOutWorks(){
+		slideDelay = 1700;
+		if(canAnim) {
+			canAnim = false;
+			windowWidth = $('body').width();
+
+			animOutWorks = new TimelineMax ()
+		        .add([
+		            TweenMax.staggerTo('.works--element > span', 0.3, 
+		            	{transform: 'translateY(50px)', ease: Circ.easeIn},0.15
+		            ),
+		            TweenMax.staggerTo('.works--right > img', 0.8, 
+		            	{opacity: 0, transform: 'translateY(-50px)', ease: Power4.easeOut,delay: 0.2},0.2
+		            ),
+		            TweenMax.to('.works--left', 0.6,
+		        		{transform: 'translateX(' + -windowWidth/2 + 'px)', ease: Power4.easeOut,delay: 1.05}
+		        	),
+		            TweenMax.to('.works--right', 0.6,
+		        		{transform: 'translateX(' + windowWidth/2 + 'px)', ease: Power4.easeOut,delay: 1}
+		        	),
+		    	]
+		    );
+
+	        setTimeout(function(){
+		    	canAnim = true;
+		    },800);
+		}
+	}
+
 	function switchWork(direction) {
 		if(canSwitchWork) {
 			if(direction == 'down') {
@@ -141,11 +209,11 @@ $('document').ready(function(){
 	        disableMouse: false,
 		},
 		onLeave: function(index, nextIndex, direction){
-			console.log(sectionWork);
+			console.log(canAnim);
 
 			// SECTION INTRO DIRECTION DOWN
 	        if(index == 1 && direction == 'down'){
-	        	slideDelay = 600;
+	        	slideDelay = 400;
 	        	sectionWork = 1;
 
 	        	// ANIM OUT INTRO
@@ -154,44 +222,50 @@ $('document').ready(function(){
 			            TweenMax.staggerTo('.introduction--title > span', 0.5, 
 			            	{opacity:0, transform: 'translateY(-20px)', ease: Circ.easeOut}, 0.15
 			            ),
-			            TweenMax.to('.introduction--initiale-r', 0.8, 
-			            	{opacity:0, transform: 'translate(-340px, -140px)', ease: Power1.easeOut,delay: 0.4}
+			            TweenMax.to('.introduction--initiale-r', 0.4, 
+			            	{opacity:0, transform: 'translate(-340px, -140px)', ease: Power1.easeOut}
 			            ),
-			            TweenMax.to('.introduction--initiale-d', 0.8, 
-			            	{opacity:0, transform: 'translate(260px, 80px)', ease: Power1.easeOut,delay: 0.4}
+			            TweenMax.to('.introduction--initiale-d', 0.4, 
+			            	{opacity:0, transform: 'translate(260px, 80px)', ease: Power1.easeOut}
 			            ),
 			    	]
 			    );
 
-
 			    // ANIM IN WORKS
-			    if(canAnim) {
-			    	canAnim = false;
-			    	$('.works--element > span').css('transform', 'translateY(50px)');
-			    	$('.works--right > img').css('opacity', 0);
-
-				    setTimeout(function(){
-				    	animWorksIn = new TimelineMax ()
-					        .add([
-					            TweenMax.staggerFromTo('.works--element > span', 0.6, 
-					            	{transform: 'translate(0, 50px)'},
-					            	{transform: 'translate(0)', ease: Circ.easeOut, onComplete: function(){
-					            		canAnim = true;
-					            	}},0.3
-					            ),
-					            TweenMax.staggerFromTo('.works--right > img', 1.6, 
-					            	{opacity: 0, transform: 'translate(0, -50px)'},
-					            	{opacity: 1, transform: 'translate(0)', ease: Power4.easeOut,delay: 0.4, onComplete: function(){
-					            		canAnim = true;
-					            	}},0.4
-					            ),
-					    	]
-					    );
-			    	},2000);
-	        	}
+		    	AnimInWorks();
+			    
+			    	
 			}
-			
-			// SECTION WORK DIRECTION DOWN
+
+	        // SECTION WORK DIRECTION UP
+	        if(index == 2 && direction == 'up') {
+	        	if(sectionWork == 0) {
+	      			// ANIM OUT WORKS
+	      			AnimOutWorks();
+
+	      			// ANIM IN INTRO
+	      			$('.introduction--title > span').css({'opacity':0, transform: 'translate(0, 40px)'});
+		        	animIntroScrollDown = new TimelineMax ()
+				        .add([
+				            TweenMax.staggerTo('.introduction--title > span', 40, 
+				            	{opacity:1, transform: 'translate(0, 0)', ease: Circ.easeOut, delay: 1.8}, 0.25
+				            ),
+				            TweenMax.to('.introduction--initiale-r', 0.8, 
+				            	{opacity:0.04, transform: 'translate(-300px, -140px)', ease: Power1.easeOut,delay: 2.2}
+				            ),
+				            TweenMax.to('.introduction--initiale-d', 0.8, 
+				            	{opacity:0.04, transform: 'translate(220px, 80px)', ease: Power1.easeOut,delay: 2.4}
+				            )
+				    	]
+				    );
+				}
+				else {					
+					switchWork('up');
+					return false;
+				}
+	        }
+
+	        // SECTION WORK DIRECTION DOWN
 	        if(index == 2 && direction == 'down') {
 	        	slideDelay = 800;
 
@@ -208,58 +282,21 @@ $('document').ready(function(){
 	        		switchWork('down');
 	        		return false;
 	        	}
+	        	// ANIM OUT WORKS
+	        	else {
+	        		AnimOutWorks();
+	        	}
         		
-	        }
-
-	        // SECTION WORK DIRECTION UP
-	        if(index == 2 && direction == 'up') {
-	        	slideDelay = 900;
-
-	        	if(sectionWork == 0) {
-		        	if(canAnim) {
-		      			canAnim = false;
-
-		      			// ANIM OUT WORKS
-		      			animOutWorks = new TimelineMax ()
-					        .add([
-					            TweenMax.staggerTo('.works--element > span', 0.3, 
-					            	{transform: 'translateY(50px)', ease: Circ.easeOut},0.15
-					            ),
-					            TweenMax.staggerTo('.works--right > img', 0.8, 
-					            	{opacity: 0, transform: 'translateY(-50px)', ease: Power4.easeOut,delay: 0.2, onComplete: function(){
-					            		canAnim = true;
-					            	}},0.2
-					            ),
-					    	]
-					    );
-
-		      			// ANIM IN INTRO
-		      			$('.introduction--title > span').css({'opacity':0, transform: 'translate(0, 40px)'});
-			        	animIntroScrollDown = new TimelineMax ()
-					        .add([
-					            TweenMax.staggerTo('.introduction--title > span', 1, 
-					            	{opacity:1, transform: 'translate(0, 0)', ease: Circ.easeOut, delay: 1.8}, 0.25
-					            ),
-					            TweenMax.to('.introduction--initiale-r', 0.8, 
-					            	{opacity:0.04, transform: 'translate(-300px, -140px)', ease: Power1.easeOut,delay: 2.2}
-					            ),
-					            TweenMax.to('.introduction--initiale-d', 0.8, 
-					            	{opacity:0.04, transform: 'translate(220px, 80px)', ease: Power1.easeOut,delay: 2.4}
-					            )
-					    	]
-					    );
-		        	}
-				}
-				else {					
-					switchWork('up');
-					return false;
-				}
 	        }
 
 	        // SECTION ABOUT DIRECTION UP
 	        if(index == 3 && direction == 'up') {
+
+	        	slideDelay = 800;
 	        	sectionWork = 3;
-	        } 
+	        	AnimInWorks();
+	        }
+
 
 	        // Scroll AFTER animation of each section
 	        setTimeout(function(){

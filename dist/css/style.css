@@ -60,11 +60,9 @@ header {
 .grid {
   position: fixed;
   width: 100%;
-  max-width: 1280px;
   height: 100%;
   pointer-events: none;
-  left: 50%;
-  margin-left: -640px; }
+  margin: 0 auto; }
   .grid .grid--line {
     position: absolute;
     width: 1px;
@@ -153,7 +151,7 @@ section.works {
       width: 100%;
       max-width: 80%; }
     section.works .works--half a {
-      color: #3A93C4; }
+      color: #52cea8; }
     section.works .works--half p.work--title {
       font-family: "neuzeit-grotesk",sans-serif;
       font-style: normal;
@@ -177,32 +175,33 @@ section.works {
       display: block; }
     section.works .works--half .works--libia-mobile {
       width: 240px;
-      left: -100px; }
+      left: -100px;
+      z-index: 20; }
     section.works .works--half .works--libia-ipad {
       width: 520px;
       right: -80px;
       bottom: 0px;
       z-index: 20; }
     section.works .works--half .works--libia-bike {
-      width: 100px;
-      top: 60px;
-      right: 180px;
-      opacity: 0.4;
+      width: 80%;
+      top: 220px;
+      left: 50px;
+      opacity: 0.1;
       stroke: #FFF; }
   section.works .works--left {
     padding: 40px;
     background: #F3F3F3;
     padding-top: 80px; }
   section.works .works--right {
-    background: #3A93C4;
+    background: #52cea8;
     cursor: pointer;
-    -webkit-transition: all 0.8s ease-in-out;
-    -moz-transition: all 0.8s ease-in-out;
-    transition: all 0.8s ease-in-out; }
+    -webkit-transition: background 0.8s ease-in-out;
+    -moz-transition: background 0.8s ease-in-out;
+    transition: background 0.8s ease-in-out; }
     section.works .works--right .work--right-cache {
       position: absolute;
       width: 100%;
-      height: 0%;
+      height: 0;
       top: 0;
       left: 0;
       background: #F3F3F3;
