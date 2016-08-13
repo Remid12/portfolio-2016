@@ -62,24 +62,24 @@ $('document').ready(function(){
 
 	function sectionWorkAnimation(number){
 		$.getJSON("js/projects.json", function(project) {
-			$('.works--right').css({'background':project[number].color});
-			$('.works--see-more').css({'color':project[number].color});
 
 			animSectionWork = new TimelineMax ()
 		        .add([
 		        	TweenMax.staggerTo('.works--right > img', 0.6, 
-	            		{opacity: 0, transform: 'translate(50px, 50px)', ease: Power4.easeIn}, 0.15
+	            		{opacity: 0, transform: 'translate(0 50px)', ease: Power4.easeIn}, 0.15
 	            	),
-	            	TweenMax.staggerFromTo('.works--right > img', 0.6,
-	            		{opacity: 0, transform: 'translate(50px, 0)'}, 
-	            		{opacity: 1, transform: 'translate(0)', ease: Power4.easeOut,delay: 1.8}, 0.15
+	            	TweenMax.staggerTo('.works--right > img', 0.6,
+	            		{opacity: 1, transform: 'translate(0)', ease: Power4.easeOut,delay: 1.2}, 0.15
 	            	),
-		        	TweenMax.fromTo('.work--right-cache', 0.6,
-		        		{'height': '0%'},
-		        		{'height': '100%', ease: Circ.easeIn}
+		        	TweenMax.fromTo('.work--right-cache-content', 0.6,
+		        		{transform: 'scale(0)'},
+		        		{transform: 'scale(1)', ease: Power4.easeIn, onComplete: function(){
+		        			$('.works--right').css({'background':project[number].color});
+							$('.works--see-more').css({'color':project[number].color});
+		        		}}
 		        	),
-		        	TweenMax.to('.work--right-cache', 0.8,
-		        		{'height': '0%', ease: Circ.easeIn, delay: 1}
+		        	TweenMax.to('.work--right-cache-content', 1.2,
+		        		{transform: 'scale(0)', ease: Power4.easeOut, delay: 1.2}
 		        	),
 		            TweenMax.staggerTo('.works--element > span', 0.3, 
 		            	{transform: 'translateY(50px)', ease: Circ.easeIn}, 0.15, function(){
@@ -97,8 +97,8 @@ $('document').ready(function(){
 		});
 	}
 
-	$('.works--left').css('transform','translateX(-100%)');
-	$('.works--right').css('transform','translateX(100%)');
+	$('.works--left').css('transform','translateX(' + -windowWidth/2 + 'px)');
+	$('.works--right').css('transform','translateX(' + windowWidth/2 + 'px)');
 
 	function AnimInWorks(){
 		if(canAnim) {
@@ -247,7 +247,7 @@ $('document').ready(function(){
 	      			$('.introduction--title > span').css({'opacity':0, transform: 'translate(0, 40px)'});
 		        	animIntroScrollDown = new TimelineMax ()
 				        .add([
-				            TweenMax.staggerTo('.introduction--title > span', 40, 
+				            TweenMax.staggerTo('.introduction--title > span', 10, 
 				            	{opacity:1, transform: 'translate(0, 0)', ease: Circ.easeOut, delay: 1.8}, 0.25
 				            ),
 				            TweenMax.to('.introduction--initiale-r', 0.8, 
