@@ -3,21 +3,36 @@
 	    "title": "Ubikah",
 	    "hashtag": "#javascript  #node.js  #animation  #game",
 	    "description":"Ubikah is a multiplayer online game. You play an astronaut, or his drone, who need to escape to an hostile planet.",
-	    "role":"All of it.",
-	    "color": "#52cea8"
+	    "role":"All of it",
+	    "color": "#52cea8",
+	    "images": [
+	    	{"image":"<img src='images/libia_mobile.png' alt='Mobile Libia' style='opacity:0;' class='works--right-img works--libia-mobile'>"},
+	    	{"image":"<img src='images/libia_ipad2.png' alt='ipad Libia' style='opacity:0;' class='works--right-img works--libia-ipad'>"},
+	    	{"image":"<img src='images/libia_bike.svg' alt='bike Libia' style='opacity:0;' class='works--right-img works--libia-bike'>"}
+	 	]
 	},
 	{
 	    "title": "Libia Vélo",
 	    "hashtag": "#javascript   #animation",
 	    "description":"Libia vélo is a redesign of the free bikes’s bornes of the city of Namur. We redesign and developper a brand new interface.",
-	    "role":"development of the borne (ipad support)",
-	    "color": "#3A93C4"
+	    "role":"Development",
+	    "color": "#3A93C4",
+	    "images": [
+	    	{"image":"<img src='images/libia_mobile.png' alt='Mobile Libia' style='opacity:0;' class='works--right-img works--libia-mobile'>"},
+	    	{"image":"<img src='images/libia_ipad2.png' alt='ipad Libia' style='opacity:0;' class='works--right-img works--libia-ipad'>"},
+	    	{"image":"<img src='images/libia_bike.svg' alt='bike Libia' style='opacity:0;' class='works--right-img works--libia-bike'>"}
+	 	]
 	},
 	{
 	    "title": "iMoule",
 	    "hashtag": "#javascript   #animation",
 	    "description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia fugit eaque, quod ut quis hic architecto earum deleniti.",
 	    "role":"Design and development",
-	    "color": "#FBF19C"
+	    "color": "#FBF19C",
+	    "images": [
+	    	{"image":"<img src='images/libia_mobile.png' alt='Mobile Libia' style='opacity:0;' class='works--right-img works--libia-mobile'>"},
+	    	{"image":"<img src='images/coquillage.png' alt='ipad Libia' style='opacity:0;' class='works--right-img works--imoule-coquillage'>"},
+	    	{"image":"<img src='images/libia_bike.svg' alt='bike Libia' style='opacity:0;' class='works--right-img works--libia-bike'>"}
+	 	]
 	}
 ]

@@ -22,7 +22,7 @@ $('document').ready(function(){
 	});
 
 	$('.works--element > span').css('transform','translate(0, 50px)');
-	$('.works--right > img').css('opacity',0);
+	$('.works--right-img').css('opacity',0);
 	
 	animIntro = new TimelineMax ()
         .add([
@@ -63,23 +63,53 @@ $('document').ready(function(){
 	function sectionWorkAnimation(number){
 		$.getJSON("js/projects.json", function(project) {
 
+			console.log(number);
+			
+
 			animSectionWork = new TimelineMax ()
 		        .add([
-		        	TweenMax.staggerTo('.works--right > img', 0.6, 
+		        	TweenMax.staggerTo('.works--right-img', 0.6, 
 	            		{opacity: 0, transform: 'translate(0 50px)', ease: Power4.easeIn}, 0.15
 	            	),
-	            	TweenMax.staggerTo('.works--right > img', 0.6,
-	            		{opacity: 1, transform: 'translate(0)', ease: Power4.easeOut,delay: 1.2}, 0.15
-	            	),
+	            	
 		        	TweenMax.fromTo('.work--right-cache-content', 0.6,
 		        		{transform: 'scale(0)'},
 		        		{transform: 'scale(1)', ease: Power4.easeIn, onComplete: function(){
+		        			//Remove images and replaces them by the new ones
+		        			$('.works--right-img').remove();
+		        			for(i=0;i<project[number].images.length;i++){
+								$('.works--right').append(project[number].images[i].image);
+							}
+							$('.works--right-img').css(
+								{
+									'opacity':0,
+									'transform': 'translate(0, 50px)'
+								}
+							);
+
+							animSectionWorkImg = new TimelineMax ()
+		        				.add([
+									TweenMax.staggerTo('.works--right-img', 0.6,
+					            		{opacity: 1, transform: 'translate(0)', ease: Power4.easeOut,delay:0.6}, 0.15
+					            	),
+					            ]
+					        );
+
 		        			$('.works--right').css({'background':project[number].color});
 							$('.works--see-more').css({'color':project[number].color});
+							$('.work--right-cache-content').css({
+							    'transform-origin':         'bottom right',
+							    '-webkit-transform-origin': 'bottom right'
+							});
 		        		}}
 		        	),
-		        	TweenMax.to('.work--right-cache-content', 1.2,
-		        		{transform: 'scale(0)', ease: Power4.easeOut, delay: 1.2}
+		        	TweenMax.to('.work--right-cache-content', 1,
+		        		{transform: 'scale(0)', ease: Power4.easeOut, delay: 1, onComplete: function(){
+		        			$('.work--right-cache-content').css({
+							    'transform-origin':         'top left',
+							    '-webkit-transform-origin': 'top left'
+							});
+		        		}}
 		        	),
 		            TweenMax.staggerTo('.works--element > span', 0.3, 
 		            	{transform: 'translateY(50px)', ease: Circ.easeIn}, 0.15, function(){
@@ -104,7 +134,8 @@ $('document').ready(function(){
 		if(canAnim) {
 			canAnim = false;
 	    	$('.works--element > span').css('transform', 'translateY(50px)');
-	    	$('.works--right > img').css('opacity', 0);
+	    	$('.works--right-img').css('opacity', 0);
+	    	$('.works--right-cache-content').css('transform', 'scale(1)');
 	    	
 
 		    setTimeout(function(){
@@ -120,7 +151,10 @@ $('document').ready(function(){
 			            	{transform: 'translate(0, 50px)'},
 			            	{transform: 'translate(0)', ease: Circ.easeOut, delay: 1},0.3
 			            ),
-			            TweenMax.staggerFromTo('.works--right > img', 1.6, 
+			            TweenMax.to('.works--right-cache-content', 1,
+			        		{transform: 'scale(1)', ease: Power4.easeIn,delay: 0.4}
+			        	),
+			            TweenMax.staggerFromTo('.works--right-img', 1.6, 
 			            	{opacity: 0, transform: 'translate(0, -50px)'},
 			            	{opacity: 1, transform: 'translate(0)', ease: Power4.easeOut,delay: 1.4},0.4
 			            ),
@@ -146,11 +180,11 @@ $('document').ready(function(){
 		            TweenMax.staggerTo('.works--element > span', 0.3, 
 		            	{transform: 'translateY(50px)', ease: Circ.easeIn},0.15
 		            ),
-		            TweenMax.staggerTo('.works--right > img', 0.8, 
+		            TweenMax.staggerTo('.works--right-img', 0.8, 
 		            	{opacity: 0, transform: 'translateY(-50px)', ease: Power4.easeOut,delay: 0.2},0.2
 		            ),
 		            TweenMax.to('.works--left', 0.6,
-		        		{transform: 'translateX(' + -windowWidth/2 + 'px)', ease: Power4.easeOut,delay: 1.05}
+		        		{transform: 'translateX(' + -windowWidth/2 + 'px)', ease: Power4.easeOut,delay: 1.1}
 		        	),
 		            TweenMax.to('.works--right', 0.6,
 		        		{transform: 'translateX(' + windowWidth/2 + 'px)', ease: Power4.easeOut,delay: 1}
@@ -200,7 +234,7 @@ $('document').ready(function(){
 		keyboardScrolling: true,
 		scrollbars: true,
 		easing: 'easeOutCubic',
-		fitToSection: true,
+		fitToSection: false,
 		scrollOverflowOptions: {
 			scrollbars: false,
 	        mouseWheel: true,
