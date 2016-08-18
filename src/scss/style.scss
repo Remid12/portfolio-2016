@@ -7,6 +7,8 @@ $grey: #9F9F9F;
 
 * {
 	@include box-sizing(border-box);
+	-webkit-font-smoothing: antialiased;
+	font-smoothing: antialiased;
 }
 
 body {
@@ -20,7 +22,7 @@ body {
 	color: $color;
 }
 
-.container {
+main.container {
 	position: relative;
 	width: 100%;
 	max-width: 1280px;
@@ -63,8 +65,16 @@ h1,h2,h3 {
 
 header {
 	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	display: block;
 	z-index: 100;
 	padding: 10px 40px;
+	width: 100%;
+	max-width: 1280px;
+	margin: 0 auto;
+	pointer-events: none;
 
 	h1 {
 		color: #333333;
@@ -75,17 +85,44 @@ header {
 			text-decoration: none;
 		}
 	}
+
+	ul.header--menu {
+		position: absolute;
+		top: 0;
+		right: 40px;
+		list-style: none;
+		margin: 0;
+		margin-top: 20px;
+		
+		li {
+			text-align: right;
+			margin-bottom: 10px;
+
+			a {
+				pointer-events: initial;
+				color: $color;
+				font-size: 16px;
+			}
+		}
+	}
+
+	&::after {
+		content: "";
+		display: table;
+		clear: both;
+	}
 }
 
 
 .grid {
 	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
 	width: 100%;
-	//max-width: 1280px;
+	max-width: 1280px;
 	height: 100%;
 	pointer-events: none;
-	//left: 50%;
-	//margin-left: -640px;
 	margin: 0 auto;
 
 	.grid--line {
@@ -131,11 +168,10 @@ section.introduction {
 		font-size: 46px;
 		width: 100%;
 		max-width: 600px;
-		left: calc(50% - 300px);
+		margin: 0 auto;
 		top: calc(50% - 220px);
-		z-index:1;
-		margin: 0;
 		padding-top: 106px;
+		z-index:1;
 		
 		span {
 			position: relative;

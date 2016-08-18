@@ -1,7 +1,9 @@
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased; }
 
 body {
   margin: 0;
@@ -13,7 +15,7 @@ body {
   font-weight: 400;
   color: #4A4A4A; }
 
-.container {
+main.container {
   position: relative;
   width: 100%;
   max-width: 1280px;
@@ -48,18 +50,48 @@ h1, h2, h3 {
 
 header {
   position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: block;
   z-index: 100;
-  padding: 10px 40px; }
+  padding: 10px 40px;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  pointer-events: none; }
   header h1 {
     color: #333333;
     font-size: 14px; }
     header h1 a {
       color: #333333;
       text-decoration: none; }
+  header ul.header--menu {
+    position: absolute;
+    top: 0;
+    right: 40px;
+    list-style: none;
+    margin: 0;
+    margin-top: 20px; }
+    header ul.header--menu li {
+      text-align: right;
+      margin-bottom: 10px; }
+      header ul.header--menu li a {
+        pointer-events: initial;
+        color: #4A4A4A;
+        font-size: 16px; }
+  header::after {
+    content: "";
+    display: table;
+    clear: both; }
 
 .grid {
   position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   width: 100%;
+  max-width: 1280px;
   height: 100%;
   pointer-events: none;
   margin: 0 auto; }
@@ -91,11 +123,10 @@ section.introduction {
     font-size: 46px;
     width: 100%;
     max-width: 600px;
-    left: calc(50% - 300px);
+    margin: 0 auto;
     top: calc(50% - 220px);
-    z-index: 1;
-    margin: 0;
-    padding-top: 106px; }
+    padding-top: 106px;
+    z-index: 1; }
     section.introduction h1 span {
       position: relative;
       display: inline-block; }

@@ -62,8 +62,6 @@ $('document').ready(function(){
 
 	function sectionWorkAnimation(number){
 		$.getJSON("js/projects.json", function(project) {
-
-			console.log(number);
 			
 
 			animSectionWork = new TimelineMax ()
@@ -278,17 +276,17 @@ $('document').ready(function(){
 	      			AnimOutWorks();
 
 	      			// ANIM IN INTRO
-	      			$('.introduction--title > span').css({'opacity':0, transform: 'translate(0, 40px)'});
+	      			$('.introduction--title > span').css({'opacity':0, transform: 'translate(0, 120px)'});
 		        	animIntroScrollDown = new TimelineMax ()
 				        .add([
-				            TweenMax.staggerTo('.introduction--title > span', 10, 
-				            	{opacity:1, transform: 'translate(0, 0)', ease: Circ.easeOut, delay: 1.8}, 0.25
+				            TweenMax.staggerTo('.introduction--title > span', 2.6, 
+				            	{opacity:1, transform: 'translate(0, 0)', ease: Power2.easeOut, delay: 2.2}, 0.15
 				            ),
 				            TweenMax.to('.introduction--initiale-r', 0.8, 
-				            	{opacity:0.04, transform: 'translate(-300px, -140px)', ease: Power1.easeOut,delay: 2.2}
+				            	{opacity:0.04, transform: 'translate(-300px, -140px)', ease: Power1.easeOut,delay: 2.6}
 				            ),
 				            TweenMax.to('.introduction--initiale-d', 0.8, 
-				            	{opacity:0.04, transform: 'translate(220px, 80px)', ease: Power1.easeOut,delay: 2.4}
+				            	{opacity:0.04, transform: 'translate(220px, 80px)', ease: Power1.easeOut,delay: 2.8}
 				            )
 				    	]
 				    );
@@ -316,9 +314,23 @@ $('document').ready(function(){
 	        		switchWork('down');
 	        		return false;
 	        	}
-	        	// ANIM OUT WORKS
 	        	else {
+	        		// ANIM OUT WORKS
 	        		AnimOutWorks();
+	        		
+	        		$('.about--content-about > h2').css({'opacity':'0', 'transform':'translate(0, 80px)'});
+	        		$('.about--half').css({'opacity':'0', 'transform':'translate(0, 120px)'});
+
+	        		animAboutIn = new TimelineMax ()
+				        .add([
+				            TweenMax.to('.about--content-about > h2', 0.8, 
+				            	{opacity:1, transform: 'translate(0, 0)', ease: Power1.easeOut, delay: 1.4}
+				            ),
+				            TweenMax.staggerTo('.about--half', 0.8, 
+				            	{opacity:1, transform: 'translate(0, 0)', ease: Power1.easeOut,delay: 2.2}, 0.2
+				            )
+				    	]
+				    );
 	        	}
         		
 	        }
@@ -326,11 +338,22 @@ $('document').ready(function(){
 	        // SECTION ABOUT DIRECTION UP
 	        if(index == 3 && direction == 'up') {
 
-	        	slideDelay = 800;
+	        	slideDelay = 720;
 	        	sectionWork = 3;
+
+	        	animAboutIn = new TimelineMax ()
+			        .add([
+			            TweenMax.to('.about--content-about > h2', 0.8, 
+			            	{opacity:0, transform: 'translate(0, 80px)', ease: Power1.easeOut}
+			            ),
+			            TweenMax.staggerTo('.about--half', 0.8, 
+			            	{opacity:0, transform: 'translate(0, 120px)', ease: Power1.easeOut}, 0.2
+			            )
+			    	]
+			    );
+
 	        	AnimInWorks();
 	        }
-
 
 	        // Scroll AFTER animation of each section
 	        setTimeout(function(){
@@ -343,6 +366,23 @@ $('document').ready(function(){
 	        }, slideDelay);
 	        return canScroll;
 	    }
+	});
+
+	$('.header--menu-intro').on('click', function(e){
+		e.preventDefault();
+		$.fn.fullpage.moveTo(1);
+	});
+	$('.header--menu-works').on('click', function(e){
+		e.preventDefault();
+		$.fn.fullpage.moveTo(2);
+	});
+	$('.header--menu-about').on('click', function(e){
+		e.preventDefault();
+		$.fn.fullpage.moveTo(3);
+	});
+	$('.header--menu-content').on('click', function(e){
+		e.preventDefault();
+		$.fn.fullpage.moveTo(3);
 	});
 
 }); 

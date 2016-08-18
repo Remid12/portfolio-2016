@@ -6,6 +6,8 @@ var notify = require("gulp-notify");
 var imagemin = require('gulp-imagemin');
 var pngquant = require('imagemin-pngquant');
 var bower = require('gulp-bower');
+var uglify = require('gulp-uglify');
+var concat = require('gulp-concat');
 
 gulp.task('default',['clean'], function() {
   gulp.start('sass','js', 'src', 'img');
@@ -50,15 +52,24 @@ gulp.task("src", function(){
 		.pipe(browserSync.reload({ 
 	      stream: true
 	    }));
-})
+});
+
+gulp.task('compress', function() {
+  return gulp.src('src/js/*.js')
+    .pipe(uglify())
+    .pipe(gulp.dest('dist/js'));
+});
 
 gulp.task("js", function(){
-  gulp.src("src/js/**/*.js")
-    .pipe(gulp.dest("dist/js"))
-    .pipe(notify("<%= file.relative %> compiled !")) // Custom message, mets ce que tu veux
-    .pipe(browserSync.reload({ 
-        stream: true
-      }));
+  //Compress script.js
+  gulp.src('src/js/*.js')
+    .pipe(uglify())
+    .pipe(gulp.dest('dist/js'));
+
+  //Concat all libs (in order to prevent bad compilation)
+  gulp.src(['src/js/libs/jquery.min.js','src/js/libs/TweenMax.min.js','src/js/libs/scrolloverflow.min.js','src/js/libs/jquery.fullPage.min.js'])
+    .pipe(concat('plugins.min.js'))
+    .pipe(gulp.dest('dist/js/libs'));
 });
 
 gulp.task('img', function(){ // Compresse les images + svg
