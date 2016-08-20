@@ -64,7 +64,11 @@ gulp.task("js", function(){
   //Compress script.js
   gulp.src('src/js/*.js')
     .pipe(uglify())
-    .pipe(gulp.dest('dist/js'));
+    .pipe(gulp.dest('dist/js'))
+    .pipe(notify("<%= file.relative %> compiled !")) // Custom message, mets ce que tu veux
+    .pipe(browserSync.reload({ 
+        stream: true
+      }));
 
   //Concat all libs (in order to prevent bad compilation)
   gulp.src(['src/js/libs/jquery.min.js','src/js/libs/TweenMax.min.js','src/js/libs/scrolloverflow.min.js','src/js/libs/jquery.fullPage.min.js'])

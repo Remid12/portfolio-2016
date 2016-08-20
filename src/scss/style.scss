@@ -9,13 +9,12 @@ $grey: #9F9F9F;
 	@include box-sizing(border-box);
 	-webkit-font-smoothing: antialiased;
 	font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 body {
 	margin: 0;
 	padding: 0;
-	-webkit-font-smoothing: antialiased;
-	font-smoothing: antialiased;
 	font-family: "garamond-premier-pro",serif;
 	font-style: normal;
 	font-weight: 400;
@@ -33,11 +32,19 @@ p {
 	letter-spacing: 0.4px;
 	font-size: 16px;
 	line-height: 28px;
+	font-weight: 400;
 }
 
 a {
-	color: $green;
+	color: $color;
+	cursor: pointer;
+	border-bottom: 2px solid #52cea8;
 	text-decoration: none;
+	transition: color 0.2s linear;
+
+	&:hover {
+		color: $green;
+	}
 }
 
 h1,h2,h3 {
@@ -83,6 +90,7 @@ header {
 		a {
 			color: #333333;
 			text-decoration: none;
+			border: none;
 		}
 	}
 
@@ -102,6 +110,7 @@ header {
 				pointer-events: initial;
 				color: $color;
 				font-size: 16px;
+				border: none;
 			}
 		}
 	}
@@ -261,10 +270,6 @@ section.works {
 			max-width: 80%;
 		}
 
-		a {
-			color: #52cea8;
-		}
-
 		p.work--title {
 			font-family: "neuzeit-grotesk",sans-serif;
 			font-style: normal;
@@ -274,7 +279,7 @@ section.works {
 		}
 
 		h2 {
-			font-family: "kepler-std-display",serif;
+			font-family: "garamond-premier-pro",serif;
 			font-style: normal;
 			font-weight: 400;
 			margin-top: 0;
@@ -368,6 +373,7 @@ section.works {
 	}
 
 	.works--see-more {
+		color: $color;
 		position: absolute;
 		bottom: 40px;
 		right: 50px;
@@ -409,14 +415,16 @@ section.about {
 
 		.about--half {
 			width: 50%;
+			padding: 0 20px;
 		}
 
 		.about--portrait {
+			margin-top: 20px;
 			img {
 				display: block;
 				width: 100%;
 				max-width: 460px;
-				margin: 20px auto 0 auto;
+				margin: 0 auto;
 				opacity: 0.3;
 			} 
 		}
@@ -426,6 +434,8 @@ section.about {
 			max-width: 400px;
 			font-size: 16px;
 			line-height: 28px;
+			margin: 0 auto;
+			margin-top: 20px;
 		}
 	}
 
@@ -442,6 +452,7 @@ section.about {
 			display: block;
 			text-align: center;
 			line-height: 36px;
+			border: none;
 		}
 
 		a.contact--mail {
@@ -451,7 +462,7 @@ section.about {
 			text-align: center;
 			color: $color;
 			text-decoration: none;
-			font-size: 36px;
+			font-size: 46px;
 			margin-bottom: 40px;
 		}
 
@@ -506,13 +517,4 @@ section.about {
 			}
 		}
 	}
-}
-
-@include keyframes(textPopUp) {
-  0% {
-   top: 50px;
-  }
-  100% {
-    top: 0;
-  }
 }

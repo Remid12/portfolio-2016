@@ -21,7 +21,7 @@ $('document').ready(function(){
 		'color': '#4A4A4A'
 	});
 
-	$('.works--element > span').css('transform','translate(0, 50px)');
+	$('.works--element > span').css('transform','translate(0, 56px)');
 	$('.works--right-img').css('opacity',0);
 	
 	animIntro = new TimelineMax ()
@@ -78,12 +78,10 @@ $('document').ready(function(){
 		        			for(i=0;i<project[number].images.length;i++){
 								$('.works--right').append(project[number].images[i].image);
 							}
-							$('.works--right-img').css(
-								{
-									'opacity':0,
-									'transform': 'translate(0, 50px)'
-								}
-							);
+							$('.works--right-img').css({
+								'opacity':0,
+								'transform': 'translate(0, 50px)'
+							});
 
 							animSectionWorkImg = new TimelineMax ()
 		        				.add([
@@ -94,23 +92,25 @@ $('document').ready(function(){
 					        );
 
 		        			$('.works--right').css({'background':project[number].color});
-							$('.works--see-more').css({'color':project[number].color});
+							$('.works--see-more').css({'border-bottom': '2px solid ' + project[number].color});
 							$('.work--right-cache-content').css({
 							    'transform-origin':         'bottom right',
 							    '-webkit-transform-origin': 'bottom right'
 							});
+
+							setTimeout(function(){
+								$('.work--right-cache-content').css({
+								    'transform-origin':         'top left',
+								    '-webkit-transform-origin': 'top left'
+								});
+							},700);
 		        		}}
 		        	),
 		        	TweenMax.to('.work--right-cache-content', 1,
-		        		{transform: 'scale(0)', ease: Power4.easeOut, delay: 1, onComplete: function(){
-		        			$('.work--right-cache-content').css({
-							    'transform-origin':         'top left',
-							    '-webkit-transform-origin': 'top left'
-							});
-		        		}}
+		        		{transform: 'scale(0)', ease: Power4.easeOut, delay: 1}
 		        	),
 		            TweenMax.staggerTo('.works--element > span', 0.3, 
-		            	{transform: 'translateY(50px)', ease: Circ.easeIn}, 0.15, function(){
+		            	{transform: 'translateY(56px)', ease: Circ.easeIn}, 0.15, function(){
 		            		$('.work--project-title > span').text(project[number].title);
 							$('.work--project-subjects > span').text(project[number].hashtag);
 							$('.work--project-description > span').text(project[number].description);
@@ -131,7 +131,7 @@ $('document').ready(function(){
 	function AnimInWorks(){
 		if(canAnim) {
 			canAnim = false;
-	    	$('.works--element > span').css('transform', 'translateY(50px)');
+	    	$('.works--element > span').css('transform', 'translateY(56px)');
 	    	$('.works--right-img').css('opacity', 0);
 	    	$('.works--right-cache-content').css('transform', 'scale(1)');
 	    	
@@ -146,7 +146,7 @@ $('document').ready(function(){
 			        		{transform: 'translateX(0)', ease: Power4.easeIn,delay: 0.1}
 			        	),
 			            TweenMax.staggerFromTo('.works--element > span', 0.6, 
-			            	{transform: 'translate(0, 50px)'},
+			            	{transform: 'translate(0, 56px)'},
 			            	{transform: 'translate(0)', ease: Circ.easeOut, delay: 1},0.3
 			            ),
 			            TweenMax.to('.works--right-cache-content', 1,
@@ -176,7 +176,7 @@ $('document').ready(function(){
 			animOutWorks = new TimelineMax ()
 		        .add([
 		            TweenMax.staggerTo('.works--element > span', 0.3, 
-		            	{transform: 'translateY(50px)', ease: Circ.easeIn},0.15
+		            	{transform: 'translateY(56px)', ease: Circ.easeIn},0.15
 		            ),
 		            TweenMax.staggerTo('.works--right-img', 0.8, 
 		            	{opacity: 0, transform: 'translateY(-50px)', ease: Power4.easeOut,delay: 0.2},0.2
@@ -235,13 +235,12 @@ $('document').ready(function(){
 		fitToSection: false,
 		scrollOverflowOptions: {
 			scrollbars: false,
-	        mouseWheel: true,
 	        hideScrollbars: false,
 	        fadeScrollbars: false,
-	        disableMouse: false,
+	        mouseWheel: true,
+			disableMouse: true
 		},
 		onLeave: function(index, nextIndex, direction){
-			console.log(canAnim);
 
 			// SECTION INTRO DIRECTION DOWN
 	        if(index == 1 && direction == 'down'){

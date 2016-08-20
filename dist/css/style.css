@@ -3,13 +3,12 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
-  font-smoothing: antialiased; }
+  font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
 
 body {
   margin: 0;
   padding: 0;
-  -webkit-font-smoothing: antialiased;
-  font-smoothing: antialiased;
   font-family: "garamond-premier-pro",serif;
   font-style: normal;
   font-weight: 400;
@@ -24,11 +23,17 @@ main.container {
 p {
   letter-spacing: 0.4px;
   font-size: 16px;
-  line-height: 28px; }
+  line-height: 28px;
+  font-weight: 400; }
 
 a {
-  color: #52cea8;
-  text-decoration: none; }
+  color: #4A4A4A;
+  cursor: pointer;
+  border-bottom: 2px solid #52cea8;
+  text-decoration: none;
+  transition: color 0.2s linear; }
+  a:hover {
+    color: #52cea8; }
 
 h1, h2, h3 {
   font-family: "neuzeit-grotesk",sans-serif;
@@ -65,7 +70,8 @@ header {
     font-size: 14px; }
     header h1 a {
       color: #333333;
-      text-decoration: none; }
+      text-decoration: none;
+      border: none; }
   header ul.header--menu {
     position: absolute;
     top: 0;
@@ -79,7 +85,8 @@ header {
       header ul.header--menu li a {
         pointer-events: initial;
         color: #4A4A4A;
-        font-size: 16px; }
+        font-size: 16px;
+        border: none; }
   header::after {
     content: "";
     display: table;
@@ -183,8 +190,6 @@ section.works {
     section.works .works--half p {
       width: 100%;
       max-width: 80%; }
-    section.works .works--half a {
-      color: #52cea8; }
     section.works .works--half p.work--title {
       font-family: "neuzeit-grotesk",sans-serif;
       font-style: normal;
@@ -192,7 +197,7 @@ section.works {
       color: #9F9F9F;
       font-size: 20px; }
     section.works .works--half h2 {
-      font-family: "kepler-std-display",serif;
+      font-family: "garamond-premier-pro",serif;
       font-style: normal;
       font-weight: 400;
       margin-top: 0; }
@@ -264,6 +269,7 @@ section.works {
     font-size: 48px;
     margin: 0; }
   section.works .works--see-more {
+    color: #4A4A4A;
     position: absolute;
     bottom: 40px;
     right: 50px;
@@ -300,18 +306,23 @@ section.about {
     section.about .about--content-about h2 {
       left: -120px; }
     section.about .about--content-about .about--half {
-      width: 50%; }
-    section.about .about--content-about .about--portrait img {
-      display: block;
-      width: 100%;
-      max-width: 460px;
-      margin: 20px auto 0 auto;
-      opacity: 0.3; }
+      width: 50%;
+      padding: 0 20px; }
+    section.about .about--content-about .about--portrait {
+      margin-top: 20px; }
+      section.about .about--content-about .about--portrait img {
+        display: block;
+        width: 100%;
+        max-width: 460px;
+        margin: 0 auto;
+        opacity: 0.3; }
     section.about .about--content-about p {
       width: 100%;
       max-width: 400px;
       font-size: 16px;
-      line-height: 28px; }
+      line-height: 28px;
+      margin: 0 auto;
+      margin-top: 20px; }
   section.about .about--content-contact h2 {
     right: -120px; }
   section.about .about--content-contact p {
@@ -319,7 +330,8 @@ section.about {
   section.about .about--content-contact a {
     display: block;
     text-align: center;
-    line-height: 36px; }
+    line-height: 36px;
+    border: none; }
   section.about .about--content-contact a.contact--mail {
     font-family: "neuzeit-grotesk",sans-serif;
     font-style: normal;
@@ -327,7 +339,7 @@ section.about {
     text-align: center;
     color: #4A4A4A;
     text-decoration: none;
-    font-size: 36px;
+    font-size: 46px;
     margin-bottom: 40px; }
   section.about .about--content-contact a.contact--tel {
     text-decoration: none;
@@ -358,21 +370,3 @@ section.about {
         background: #000; }
       section.about .about--content-contact ul.contact--social-list li:nth-of-type(4) a {
         background: #0077B5; }
-
-@-webkit-keyframes textPopUp {
-  0% {
-    top: 50px; }
-  100% {
-    top: 0; } }
-
-@-moz-keyframes textPopUp {
-  0% {
-    top: 50px; }
-  100% {
-    top: 0; } }
-
-@keyframes textPopUp {
-  0% {
-    top: 50px; }
-  100% {
-    top: 0; } }
