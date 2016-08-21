@@ -307,6 +307,7 @@ section.works {
 			width: 140px;
 			left: 120px;
 			top: 40px;
+			@include transform-origin(50% 50%); @include animation(droneFloating 2s ease-in-out infinite alternate);
 		}
 
 		.works--ubikah-browser {
@@ -573,3 +574,55 @@ section.about {
 		}
 	}
 }
+
+
+@include keyframes(droneFloating) {
+	0% {
+		@include transform(translate(0,0) rotate(3deg));
+	}
+
+	100% {
+		@include transform(translate(-4px,8px) rotate(-2deg));
+	} 
+}
+
+@include keyframes(cosmonauteEyes) {
+	0% {
+		@include transform(translateY(0));
+	}
+
+	8% {
+		@include transform(translateY(6px));
+	}
+
+	18% {
+		@include transform(translateY(0));
+	}
+
+	100% {
+		@include transform(translateY(0));
+	}
+}
+
+@include keyframes(cosmonauteBody) {
+	0% {
+		@include transform(translateY(0));
+	}
+
+	100% {
+		@include transform(translateY(4px));
+	}
+}
+
+@include keyframes(cosmonauteArms) {
+	0% {
+		@include transform(translateY(0));
+	}
+
+	100% {
+		@include transform(translateY(8px));
+	}
+}
+.paupiere { @include animation(cosmonauteEyes 2s 1.2s linear infinite); }
+.cosmonaute { @include animation(cosmonauteBody 3s linear infinite alternate); }
+.bras,#trait_bras_gauche,#trait_bras_droit { @include animation(cosmonauteArms 2s 0.5s linear infinite alternate); }

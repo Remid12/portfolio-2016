@@ -389,4 +389,8 @@ $('document').ready(function(){
 		$.fn.fullpage.moveTo(3);
 	});
 
+	$('.works--see-more').on('click', function(e){
+		e.preventDefault();
+	})
+
 }); 
