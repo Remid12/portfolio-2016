@@ -8,9 +8,10 @@ var pngquant = require('imagemin-pngquant');
 var bower = require('gulp-bower');
 var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
+var browserify = require('gulp-browserify');
 
 gulp.task('default',['clean'], function() {
-  gulp.start('sass','js', 'src', 'img');
+  gulp.start('sass', 'src', 'img','js');
 });
  
 gulp.task('bower', function() {
@@ -46,26 +47,24 @@ gulp.task('sass', function(){
 });
 
 gulp.task("src", function(){
-	gulp.src("src/view/index.html")
-		.pipe(gulp.dest("dist"))
-		.pipe(notify("<%= file.relative %> compiled !")) // Custom message, mets ce que tu veux
-		.pipe(browserSync.reload({ 
-	      stream: true
-	    }));
-});
-
-gulp.task('compress', function() {
-  return gulp.src('src/js/*.js')
-    .pipe(uglify())
-    .pipe(gulp.dest('dist/js'));
-});
+  gulp.src("src/view/index.html")
+    .pipe(gulp.dest("dist"))
+    .pipe(notify("<%= file.relative %> compiled !")) // Custom message, mets ce que tu veux
+    .pipe(browserSync.reload({ 
+        stream: true
+      }));
+})
 
 gulp.task("js", function(){
   //Compress script.js
   gulp.src('src/js/*.js')
+    .pipe(browserify({ debug: true }))
+    .on("error", notify.onError({
+        message: 'Error: <%= error.message %>'
+      }))
     .pipe(uglify())
     .pipe(gulp.dest('dist/js'))
-    .pipe(notify("<%= file.relative %> compiled !")) // Custom message, mets ce que tu veux
+    .pipe(notify("<%= file.relative %> compiled !"))
     .pipe(browserSync.reload({ 
         stream: true
       }));
@@ -93,8 +92,7 @@ gulp.task('img', function(){ // Compresse les images + svg
 
 gulp.task("watch", ['browserSync'], function(){
   // Ce que gulp doit surveiller et rafraichir à chaque changement
-	gulp.watch("src/scss/**/*.scss", ["sass"]);
-	gulp.watch('src/view/index.html',["src"] );
-	gulp.watch('src/js/*.js',["js"] );
+  gulp.watch("src/scss/**/*.scss", ["sass"]);
+  gulp.watch('src/view/index.html',["src"] );
+  gulp.watch('src/js/*.js',["js"] );
 });
-

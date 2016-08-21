@@ -208,12 +208,25 @@ section.works {
       section.works .works--half .works--element span {
         position: relative;
         display: inline-block; }
-    section.works .works--half img {
+    section.works .works--half img, section.works .works--half svg {
       position: absolute;
       display: block; }
+    section.works .works--half .works--ubikah-drone {
+      width: 140px;
+      left: 120px;
+      top: 40px; }
+    section.works .works--half .works--ubikah-browser {
+      width: 600px;
+      right: -100px;
+      top: 160px; }
+    section.works .works--half .works--ubikah-cosmonaute {
+      width: 200px;
+      bottom: 0;
+      left: -18px; }
     section.works .works--half .works--libia-mobile {
       width: 240px;
       left: -100px;
+      top: 10px;
       z-index: 20; }
     section.works .works--half .works--libia-ipad {
       width: 520px;
@@ -227,8 +240,23 @@ section.works {
       opacity: 0.1;
       stroke: #FFF; }
     section.works .works--half .works--imoule-coquillage {
-      top: 220px;
-      left: 180px; }
+      top: 40px;
+      right: 140px;
+      -webkit-filter: blur(4px);
+      filter: blur(4px); }
+    section.works .works--half .works--imoule-moule {
+      top: 140px;
+      left: -80px; }
+    section.works .works--half .works--imoule-browser {
+      width: 660px;
+      right: -100px;
+      bottom: -120px; }
+    section.works .works--half .works--imoule-crabe {
+      width: 120px;
+      right: 400px;
+      bottom: 120px;
+      -webkit-filter: blur(1px);
+      filter: blur(1px); }
   section.works .works--left {
     padding: 40px;
     background: #F3F3F3;
@@ -276,7 +304,21 @@ section.works {
     font-size: 18px;
     -webkit-transition: all 0.8s ease-in-out;
     -moz-transition: all 0.8s ease-in-out;
-    transition: all 0.8s ease-in-out; }
+    transition: all 0.8s ease-in-out;
+    border: none; }
+    section.works .works--see-more:after {
+      content: '';
+      position: absolute;
+      height: 3px;
+      width: 20px;
+      background: #52cea8;
+      left: 0;
+      bottom: 0;
+      -webkit-transition: all 0.2s ease-in-out;
+      -moz-transition: all 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out; }
+    section.works .works--see-more:hover:after {
+      width: 100%; }
 
 section.about {
   padding: 40px;

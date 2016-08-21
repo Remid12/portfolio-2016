@@ -62,7 +62,7 @@ $('document').ready(function(){
 
 	function sectionWorkAnimation(number){
 		$.getJSON("js/projects.json", function(project) {
-			
+			console.log(number);
 
 			animSectionWork = new TimelineMax ()
 		        .add([
@@ -92,7 +92,12 @@ $('document').ready(function(){
 					        );
 
 		        			$('.works--right').css({'background':project[number].color});
-							$('.works--see-more').css({'border-bottom': '2px solid ' + project[number].color});
+
+							document.styleSheets[0].addRule('section.works a.works--see-more:after','background:' + project[number].color);
+							if(number == 2) {
+								document.styleSheets[0].addRule('section.works a.works--see-more:after','background:#F3DD29');
+							} 
+
 							$('.work--right-cache-content').css({
 							    'transform-origin':         'bottom right',
 							    '-webkit-transform-origin': 'bottom right'
@@ -125,9 +130,25 @@ $('document').ready(function(){
 		});
 	}
 
+	function AnimInIntro() {
+		$('.introduction--title > span').css({'opacity':0, transform: 'translate(0, 120px)'});
+    	animIntroScrollDown = new TimelineMax ()
+	        .add([
+	            TweenMax.staggerTo('.introduction--title > span', 2.6, 
+	            	{opacity:1, transform: 'translate(0, 0)', ease: Power2.easeOut, delay: 2.2}, 0.15
+	            ),
+	            TweenMax.to('.introduction--initiale-r', 0.8, 
+	            	{opacity:0.04, transform: 'translate(-300px, -140px)', ease: Power1.easeOut,delay: 2.6}
+	            ),
+	            TweenMax.to('.introduction--initiale-d', 0.8, 
+	            	{opacity:0.04, transform: 'translate(220px, 80px)', ease: Power1.easeOut,delay: 2.8}
+	            )
+	    	]
+	    );
+	}
+
 	$('.works--left').css('transform','translateX(' + -windowWidth/2 + 'px)');
 	$('.works--right').css('transform','translateX(' + windowWidth/2 + 'px)');
-
 	function AnimInWorks(){
 		if(canAnim) {
 			canAnim = false;
@@ -152,9 +173,9 @@ $('document').ready(function(){
 			            TweenMax.to('.works--right-cache-content', 1,
 			        		{transform: 'scale(1)', ease: Power4.easeIn,delay: 0.4}
 			        	),
-			            TweenMax.staggerFromTo('.works--right-img', 1.6, 
-			            	{opacity: 0, transform: 'translate(0, -50px)'},
-			            	{opacity: 1, transform: 'translate(0)', ease: Power4.easeOut,delay: 1.4},0.4
+			            TweenMax.staggerFromTo('.works--right-img', 1.2, 
+			            	{opacity: 0, transform: 'translate(0, 50px)'},
+			            	{opacity: 1, transform: 'translate(0)', ease: Power4.easeOut,delay: 1.4},0.2
 			            ),
 			    	]
 			    );
@@ -244,13 +265,13 @@ $('document').ready(function(){
 
 			// SECTION INTRO DIRECTION DOWN
 	        if(index == 1 && direction == 'down'){
-	        	slideDelay = 400;
+	        	slideDelay = 500;
 	        	sectionWork = 1;
 
 	        	// ANIM OUT INTRO
 	        	animIntroOut = new TimelineMax ()
 			        .add([
-			            TweenMax.staggerTo('.introduction--title > span', 0.5, 
+			            TweenMax.staggerTo('.introduction--title > span', 0.6, 
 			            	{opacity:0, transform: 'translateY(-20px)', ease: Circ.easeOut}, 0.15
 			            ),
 			            TweenMax.to('.introduction--initiale-r', 0.4, 
@@ -275,20 +296,7 @@ $('document').ready(function(){
 	      			AnimOutWorks();
 
 	      			// ANIM IN INTRO
-	      			$('.introduction--title > span').css({'opacity':0, transform: 'translate(0, 120px)'});
-		        	animIntroScrollDown = new TimelineMax ()
-				        .add([
-				            TweenMax.staggerTo('.introduction--title > span', 2.6, 
-				            	{opacity:1, transform: 'translate(0, 0)', ease: Power2.easeOut, delay: 2.2}, 0.15
-				            ),
-				            TweenMax.to('.introduction--initiale-r', 0.8, 
-				            	{opacity:0.04, transform: 'translate(-300px, -140px)', ease: Power1.easeOut,delay: 2.6}
-				            ),
-				            TweenMax.to('.introduction--initiale-d', 0.8, 
-				            	{opacity:0.04, transform: 'translate(220px, 80px)', ease: Power1.easeOut,delay: 2.8}
-				            )
-				    	]
-				    );
+	      			AnimInIntro();
 				}
 				else {					
 					switchWork('up');
@@ -369,17 +377,14 @@ $('document').ready(function(){
 
 	$('.header--menu-intro').on('click', function(e){
 		e.preventDefault();
+		AnimInIntro();
 		$.fn.fullpage.moveTo(1);
 	});
 	$('.header--menu-works').on('click', function(e){
 		e.preventDefault();
 		$.fn.fullpage.moveTo(2);
 	});
-	$('.header--menu-about').on('click', function(e){
-		e.preventDefault();
-		$.fn.fullpage.moveTo(3);
-	});
-	$('.header--menu-content').on('click', function(e){
+	$('.header--menu-about, .header--menu-content').on('click', function(e){
 		e.preventDefault();
 		$.fn.fullpage.moveTo(3);
 	});
