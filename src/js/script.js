@@ -11,6 +11,7 @@ $('document').ready(function(){
 	var currentColorWork = '#3A93C4';
 	var canAnim = true;
 	var windowWidth = $('body').width();
+	var windowHeight = $('body').height();
 
 
 	// ANIMATION INTRODUCTION AFTER PAGE LOAD
@@ -389,8 +390,81 @@ $('document').ready(function(){
 		$.fn.fullpage.moveTo(3);
 	});
 
-	$('.works--see-more').on('click', function(e){
+	$('.works--see-more, .works--right').on('click', function(e){
 		e.preventDefault();
-	})
+		var WorksLinkHref = $('.works--see-more').attr('href');
+		console.log(WorksLinkHref);
+		TweenMax.killAll(false, true, false);
+		windowWidth = $('body').width();
+		$('.works--right').css({
+			'position':'absolute',
+			'left':'50%'
+		});
+
+		animWorksClick = new TimelineMax ()
+	        .add([
+	            TweenMax.to('.header', 0.4, 
+	            	{opacity:0, transform: 'translate(0, -50px)', ease: Power1.easeOut}
+	            ),
+	            TweenMax.to('.works--see-more', 0.2, 
+	            	{opacity:0, transform: 'translate(0, 50px)', ease: Power1.easeOut}
+	            ),
+	            TweenMax.staggerTo('.works--element-title', 0.4, 
+	            	{opacity:0, transform: 'translate(0, 50px)', ease: Power1.easeOut},0.1
+	            ),
+	            TweenMax.staggerTo('.works--element > span', 0.4, 
+	            	{opacity:1, transform: 'translate(0, 56px)', ease: Power1.easeOut,delay: 0.2}, 0.1
+	            ),
+	            TweenMax.staggerTo('.works--right-img', 0.4, 
+	            	{opacity:0, transform: 'translate(0, 50px)', ease: Power1.easeOut,delay: 0.2}, 0.1
+	            ),
+	            TweenMax.to('.works--right', 0.5, 
+	            	{width:'100%', transform: 'translate(-' + windowWidth/2 + 'px, 0)', ease: Circ.easeInOut,delay: 0.85}
+	            )
+	    	]
+	    );
+
+	    setTimeout(function(){
+	    	window.location.href = WorksLinkHref;
+	    },1500);
+
+	});
+
+	$('.works--right').on('mouseover', function(e){
+		$('.works--see-more').after().toggleClass('works--see-more-hover');
+	});
+
+
+
+	//PAGES PROJECTS
+
+	$('.header').css({
+		'opacity':'0',
+		'transform':'translate(0, -50px)'
+	});
+
+	$('.project--header').css({
+		'height':'100%'
+	});
+
+	$('.project--header > h1').css({
+		'opacity':'0',
+		'transform':'translate(0, 50px)'
+	});
+
+	windowHeight = $('body').height();
+
+	animWorksClick = new TimelineMax ()
+        .add([
+        	TweenMax.to('.header', 0.4, 
+            	{opacity: 1, transform: 'translate(0,0)', ease: Circ.easeOut,delay: 0.5}
+            ),
+            TweenMax.to('.project--header', 0.6, 
+            	{height: windowHeight/2 + 'px', ease: Circ.easeInOut}
+            ),
+            TweenMax.to('.project--header > h1', 0.6, 
+            	{opacity: 1, transform: 'translate(0,0)', ease: Circ.easeOut,delay: 0.5}
+            )
+    ]);
 
 }); 

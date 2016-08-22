@@ -427,7 +427,7 @@ section.works {
 			background: $green;
 			left: 0;
 			bottom: 0;
-			@include transition(all 0.2s ease-in-out);
+			@include transition(all 0.2s cubic-bezier(0.3, -1, 0.7, 2));
 		}
 
 		&:hover {
@@ -572,6 +572,23 @@ section.about {
 				}
 			}
 		}
+	}
+}
+
+
+section.project--header {
+	height: 50vh;
+	width: 100%;
+	background: $green;
+
+	h1 {
+		color: $lightgrey;
+		position: absolute;
+		margin: 0;
+		font-size: 260px;
+		left: 26px;
+		bottom: 0;
+		margin-bottom: -200px;
 	}
 }
 

@@ -47,7 +47,7 @@ gulp.task('sass', function(){
 });
 
 gulp.task("src", function(){
-  gulp.src("src/view/index.html")
+  gulp.src("src/view/**/*.html")
     .pipe(gulp.dest("dist"))
     .pipe(notify("<%= file.relative %> compiled !")) // Custom message, mets ce que tu veux
     .pipe(browserSync.reload({ 
@@ -93,6 +93,6 @@ gulp.task('img', function(){ // Compresse les images + svg
 gulp.task("watch", ['browserSync'], function(){
   // Ce que gulp doit surveiller et rafraichir à chaque changement
   gulp.watch("src/scss/**/*.scss", ["sass"]);
-  gulp.watch('src/view/index.html',["src"] );
+  gulp.watch('src/view/**/*.html',["src"] );
   gulp.watch('src/js/*.js',["js"] );
 });
