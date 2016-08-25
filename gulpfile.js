@@ -70,7 +70,7 @@ gulp.task("js", function(){
       }));
 
   //Concat all libs (in order to prevent bad compilation)
-  gulp.src(['src/js/libs/jquery.min.js','src/js/libs/TweenMax.min.js','src/js/libs/scrolloverflow.min.js','src/js/libs/jquery.fullPage.min.js'])
+  gulp.src(['src/js/libs/jquery.min.js','src/js/libs/TweenMax.min.js','src/js/libs/scrolloverflow.min.js','src/js/libs/jquery.fullPage.min.js', 'src/js/libs/segment.min.js'])
     .pipe(concat('plugins.min.js'))
     .pipe(gulp.dest('dist/js/libs'));
 });
